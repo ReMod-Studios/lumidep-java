@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "lumidep:block/brackwood_log_top",
+    "side": "lumidep:block/brackwood_log"
+  }
+}

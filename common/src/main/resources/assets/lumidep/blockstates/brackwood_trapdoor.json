@@ -1,0 +1,88 @@
+{
+  "variants": {
+    "facing\u003dnorth,half\u003dtop,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing\u003dnorth,half\u003dtop,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_top",
+      "uvlock": true,
+      "y": 0
+    },
+    "facing\u003dnorth,half\u003dbottom,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "y": 0
+    },
+    "facing\u003dnorth,half\u003dbottom,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_bottom",
+      "uvlock": true,
+      "y": 0
+    },
+    "facing\u003dsouth,half\u003dtop,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "x": 180,
+      "y": 0
+    },
+    "facing\u003dsouth,half\u003dtop,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_top",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing\u003dsouth,half\u003dbottom,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing\u003dsouth,half\u003dbottom,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing\u003dwest,half\u003dtop,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing\u003dwest,half\u003dtop,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_top",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing\u003dwest,half\u003dbottom,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing\u003dwest,half\u003dbottom,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing\u003deast,half\u003dtop,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing\u003deast,half\u003dtop,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_top",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing\u003deast,half\u003dbottom,open\u003dtrue": {
+      "model": "lumidep:block/brackwood_trapdoor_open",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing\u003deast,half\u003dbottom,open\u003dfalse": {
+      "model": "lumidep:block/brackwood_trapdoor_bottom",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

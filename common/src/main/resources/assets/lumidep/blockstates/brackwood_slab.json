@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type\u003dbottom": {
+      "model": "lumidep:block/brackwood_slab"
+    },
+    "type\u003dtop": {
+      "model": "lumidep:block/brackwood_slab_top"
+    },
+    "type\u003ddouble": {
+      "model": "lumidep:block/brackwood_planks"
+    }
+  }
+}

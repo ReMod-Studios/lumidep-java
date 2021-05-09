@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis\u003dx": {
+      "model": "lumidep:block/stripped_brackwood_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis\u003dz": {
+      "model": "lumidep:block/stripped_brackwood_wood",
+      "x": 90
+    },
+    "axis\u003dy": {
+      "model": "lumidep:block/stripped_brackwood_wood"
+    }
+  }
+}

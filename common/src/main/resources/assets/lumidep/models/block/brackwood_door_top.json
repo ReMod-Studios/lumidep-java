@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "lumidep:block/brackwood_door_top",
+    "bottom": "lumidep:block/brackwood_door_bottom"
+  }
+}
