@@ -1,7 +1,7 @@
 package com.remodstudios.lumidep.fabric
 
 import com.remodstudios.lumidep.Lumidep.id
-import com.remodstudios.lumidep.LumidepItems
+import com.remodstudios.lumidep.item.LumidepItems
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack

@@ -14,8 +14,15 @@
     "main": [{
       "adapter": "kotlin",
       "value": "com.remodstudios.lumidep.fabric.LumidepFabric"
+    }],
+    "client": [{
+      "adapter": "kotlin",
+      "value": "com.remodstudios.lumidep.fabric.LumidepFabricClient"
     }]
   },
+  "mixins": [
+    "lumidep.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.11.1",
     "fabric": "*",

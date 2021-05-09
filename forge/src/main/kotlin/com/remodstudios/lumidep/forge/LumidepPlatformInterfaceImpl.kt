@@ -1,6 +1,6 @@
 package com.remodstudios.lumidep.forge
 
-import com.remodstudios.lumidep.LumidepItems
+import com.remodstudios.lumidep.item.LumidepItems
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 

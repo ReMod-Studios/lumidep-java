@@ -1,11 +1,12 @@
-package com.remodstudios.lumidep
+package com.remodstudios.lumidep.item
 
-import com.remodstudios.lumidep.item.BrackwoodSignItem
+import com.remodstudios.lumidep.Lumidep
+import com.remodstudios.lumidep.getItemGroup
 import com.remodstudios.remodcore.ItemRegistryHelper
 import me.shedaniel.architectury.registry.DeferredRegister
 import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
-import com.remodstudios.lumidep.LumidepBlocks as Lb
+import com.remodstudios.lumidep.block.LumidepBlocks as Lb
 
 object LumidepItems: ItemRegistryHelper(Lumidep.MOD_ID) {
     val REGISTRY = DeferredRegister.create(Lumidep.MOD_ID, Registry.ITEM_KEY)

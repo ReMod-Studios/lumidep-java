@@ -1,6 +1,6 @@
 package com.remodstudios.remodcore
 
-import com.remodstudios.lumidep.LumidepBlocks
+import com.remodstudios.lumidep.block.LumidepBlocks
 import me.shedaniel.architectury.registry.BlockProperties
 import me.shedaniel.architectury.registry.DeferredRegister
 import net.minecraft.block.Block
@@ -32,47 +32,39 @@ open class BlockRegistryHelper(
         return LumidepBlocks.add(id, block)
     }
 
-    fun <Original: Block, V: Block> addCopyWithFactory(
+    fun <Original: Block, V: Block> addCopy(
         id: String,
         original: Original,
         factory: BlockProperties.() -> V,
-    ): V {
-        return addOfProp(id, BlockProperties.copy(original), factory)
-    }
+    ) = addOfProp(id, BlockProperties.copy(original), factory)
 
-    fun <Original: Block> addCopy(
+    fun <Original: Block> addCopyWithInit(
         id: String,
         original: Original,
-        init: BlockProperties.() -> Unit,
+        factory: BlockProperties.() -> Unit,
     ): Block {
         val prop = BlockProperties.copy(original)
-        prop.init()
+        prop.factory()
         return addOfProp(id, prop, ::Block)
     }
 
     fun <Original: Block> addCopy(
         id: String,
         original: Original
-    ): Block {
-        return addCopy(id, original, ::Block)
-    }
+    ) = addCopy(id, original) { Block(this) }
 
     fun <V: Block> addOfMaterial(
         id: String,
         mat: Material,
         factory: BlockProperties.() -> V
-    ): V {
-        return addOfProp(id, BlockProperties.of(mat), factory)
-    }
+    ) = addOfProp(id, BlockProperties.of(mat), factory)
 
     fun <V: Block> addWoodlike(
         id: String,
         factory: BlockProperties.() -> V
-    ): V {
-        return addOfMaterial(id, Material.WOOD) {
-            strength(2.0F)
-            sounds(BlockSoundGroup.WOOD)
-            this.factory()
-        }
+    ) = addOfMaterial(id, Material.WOOD) {
+        strength(2.0F)
+        sounds(BlockSoundGroup.WOOD)
+        this.factory()
     }
 }

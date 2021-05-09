@@ -1,11 +1,9 @@
-package com.remodstudios.lumidep
+package com.remodstudios.lumidep.entity
 
+import com.remodstudios.lumidep.Lumidep
 import me.shedaniel.architectury.registry.DeferredRegister
-import net.minecraft.block.Block
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
-import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
 object LumidepEntities {

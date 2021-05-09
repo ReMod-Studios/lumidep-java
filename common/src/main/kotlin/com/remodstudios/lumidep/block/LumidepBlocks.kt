@@ -1,14 +1,14 @@
-package com.remodstudios.lumidep
+package com.remodstudios.lumidep.block
 
-import com.remodstudios.lumidep.block.*
+import com.remodstudios.lumidep.Lumidep
 import com.remodstudios.remodcore.BlockRegistryHelper
 import net.minecraft.block.*
 import net.minecraft.sound.BlockSoundGroup
 
 
 object LumidepBlocks: BlockRegistryHelper(Lumidep.MOD_ID) {
-    val BLACK_SAND = addCopy("black_sand", Blocks.DIRT) { sounds(BlockSoundGroup.SAND) }
-    val TUNGSTEN_DEPOSIT = addCopy("tungsten_deposit", Blocks.SANDSTONE) { sounds(BlockSoundGroup.SAND) }
+    val BLACK_SAND = addCopyWithInit("black_sand", Blocks.DIRT) { sounds(BlockSoundGroup.SAND) }
+    val TUNGSTEN_DEPOSIT = addCopyWithInit("tungsten_deposit", Blocks.SANDSTONE) { sounds(BlockSoundGroup.SAND) }
     val TUNGSTEN_BLOCK = addCopy("tungsten_block", Blocks.IRON_BLOCK)
     val CORALLINE_ALGAE = addOfMaterial("coralline_algae", Material.REPLACEABLE_PLANT) { Block(strength(0.2f).sounds(BlockSoundGroup.VINE).nonOpaque()) }
     val DEAD_KELP = addCopy("dead_kelp", Blocks.KELP_PLANT)
@@ -33,5 +33,10 @@ object LumidepBlocks: BlockRegistryHelper(Lumidep.MOD_ID) {
 
     val BRACKWOOD_FENCE = addCopy("brackwood_fence", Blocks.OAK_FENCE, ::FenceBlock)
     val BRACKWOOD_FENCE_GATE = addCopy("brackwood_fence_gate", Blocks.OAK_FENCE_GATE, ::FenceGateBlock)
+
+
+    fun lol() {
+
+    }
 }
 
