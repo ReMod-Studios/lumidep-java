@@ -1,0 +1,45 @@
+modLoader="kotlinforforge"
+loaderVersion="[1.12,)"
+#issueTrackerURL = ""
+license = "Apache-2.0"
+
+[[mods]]
+modId = "lumidep"
+version = "${version}"
+displayName = "Luminous Depths"
+authors = "ReMod Studios"
+description = '''
+A project that brings in a whole new level of depth to Minecraft's oceans,
+(pun intended), from creatures such as anglerfish to giant isopods,
+new blocks, and strange structures.
+'''
+#logoFile = ""
+
+[[dependencies.lumidep]]
+modId = "forge"
+mandatory = true
+versionRange = "[35,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lumidep]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lumidep]]
+modId = "architectury"
+mandatory = true
+versionRange = "[1.1.55,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.lumidep]]
+modId = "geckolib3"
+mandatory = true
+versionRange = "[3.0.3,)"
+ordering = "AFTER"
+side = "BOTH"
+
