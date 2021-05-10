@@ -17,12 +17,12 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
     ): RegistrySupplier<I>
         = registry.register(id) { i }
 
-    fun <I: Item> addWithFactory(
+    inline fun <I: Item> addWithFactory(
         id: String,
         factory: Item.Settings.() -> I
     ) = add(id, factory(defaultSettings()))
 
-    fun add(
+    inline fun add(
         id: String,
         init: Item.Settings.() -> Unit = {}
     ): RegistrySupplier<Item> {
@@ -31,7 +31,7 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
         return add(id, Item(settings))
     }
 
-    fun <B: Block> add(
+    inline fun <B: Block> add(
         id: String,
         b: B,
         init: Item.Settings.() -> Unit = {}
@@ -42,7 +42,7 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
         }
     }
 
-    fun <B: Block> add(
+    inline fun <B: Block> add(
         id: String,
         b: RegistrySupplier<B>,
         init: Item.Settings.() -> Unit = {}
