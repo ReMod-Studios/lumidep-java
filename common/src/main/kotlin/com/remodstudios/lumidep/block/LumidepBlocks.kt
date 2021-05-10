@@ -7,7 +7,7 @@ import net.minecraft.sound.BlockSoundGroup
 
 
 object LumidepBlocks: BlockRegistryHelper(Lumidep.MOD_ID) {
-    val BLACK_SAND = addCopyWithInit("black_sand", Blocks.DIRT) { sounds(BlockSoundGroup.SAND) }
+    val BLACK_SAND = addCopy("black_sand", Blocks.DIRT) { FallingBlock(sounds(BlockSoundGroup.SAND)) }
     val TUNGSTEN_DEPOSIT = addCopyWithInit("tungsten_deposit", Blocks.SANDSTONE) { sounds(BlockSoundGroup.SAND) }
     val TUNGSTEN_BLOCK = addCopy("tungsten_block", Blocks.IRON_BLOCK)
     val CORALLINE_ALGAE = addOfMaterial("coralline_algae", Material.REPLACEABLE_PLANT) { Block(strength(0.2f).sounds(BlockSoundGroup.VINE).nonOpaque()) }

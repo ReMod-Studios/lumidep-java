@@ -12,8 +12,7 @@ open class BlockRegistryHelper(
     registry: DeferredRegister<Block>
 ): RegistryHelper<Block>(registry) {
 
-    constructor(modid: String)
-            : this(DeferredRegister.create(modid, Registry.BLOCK_KEY))
+    constructor(modid: String) : this(DeferredRegister.create(modid, Registry.BLOCK_KEY))
 
     fun <V: Block> add(
         id: String,
@@ -23,7 +22,7 @@ open class BlockRegistryHelper(
         return v
     }
 
-    fun <V: Block> addOfProp(
+    inline fun <V: Block> addOfProp(
         id: String,
         prop: BlockProperties,
         factory: BlockProperties.() -> V,
@@ -32,13 +31,13 @@ open class BlockRegistryHelper(
         return LumidepBlocks.add(id, block)
     }
 
-    fun <Original: Block, V: Block> addCopy(
+    inline fun <Original: Block, V: Block> addCopy(
         id: String,
         original: Original,
         factory: BlockProperties.() -> V,
     ) = addOfProp(id, BlockProperties.copy(original), factory)
 
-    fun <Original: Block> addCopyWithInit(
+    inline fun <Original: Block> addCopyWithInit(
         id: String,
         original: Original,
         factory: BlockProperties.() -> Unit,
@@ -53,13 +52,13 @@ open class BlockRegistryHelper(
         original: Original
     ) = addCopy(id, original) { Block(this) }
 
-    fun <V: Block> addOfMaterial(
+    inline fun <V: Block> addOfMaterial(
         id: String,
         mat: Material,
         factory: BlockProperties.() -> V
     ) = addOfProp(id, BlockProperties.of(mat), factory)
 
-    fun <V: Block> addWoodlike(
+    inline fun <V: Block> addWoodlike(
         id: String,
         factory: BlockProperties.() -> V
     ) = addOfMaterial(id, Material.WOOD) {

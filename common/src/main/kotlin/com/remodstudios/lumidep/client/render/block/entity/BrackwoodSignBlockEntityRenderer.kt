@@ -30,6 +30,12 @@ class BrackwoodSignBlockEntityRenderer(dispatcher: BlockEntityRenderDispatcher)
         light: Int, overlay: Int
     ) {
         val state = blockEntity.cachedState
+        val signBlock = state.block as AbstractSignBlock
+
+        val marking = state[Marking.PROPERTY]
+        val markingSpriteId = SpriteIdentifierUtil.markingSpriteId(marking);
+        val signSpriteId = SpriteIdentifierUtil.signSpriteId(signBlock.signType)
+
         matrices.frame {
             matrices.translate(0.5, 0.5, 0.5)
             when (state.block) {
@@ -48,11 +54,6 @@ class BrackwoodSignBlockEntityRenderer(dispatcher: BlockEntityRenderDispatcher)
                     throw IllegalStateException("block should be either a SignBlock or a WallSignBlock")
                 }
             }
-            val signBlock = state.block as AbstractSignBlock
-
-            val marking = state[Marking.PROPERTY]
-            val markingSpriteId = SpriteIdentifierUtil.markingSpriteId(marking);
-            val signSpriteId = SpriteIdentifierUtil.signSpriteId(signBlock.signType)
 
             matrices.scale(2/3f, -2/3f, -2/3f)
             val signVertexConsumer = signSpriteId.getVertexConsumer(vertexConsumerProvider, signModel::getLayer)
