@@ -13,9 +13,16 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.controller.AnimationController
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
+import software.bernie.geckolib3.core.manager.AnimationData
+import software.bernie.geckolib3.core.manager.AnimationFactory
 
 // TODO no geckolib for now until they fix their BS - leocth
-class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: World): OceanFloorWalkerEntity(entityType, world)/*, IAnimatable*/ {
+class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: World): OceanFloorWalkerEntity(entityType, world),
+    IAnimatable {
 
     override fun getMaxAir() = 4800
     override fun getNextAirOnLand(air: Int) = maxAir
@@ -62,4 +69,17 @@ class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: Worl
             .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
             .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
     }
+
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(
+            this, "controller", 0f,
+            // the fact that i have to do this makes me angry
+            object: AnimationController.IAnimationPredicate<AdultKreplerEntity> {
+                override fun <P : IAnimatable?> test(p0: AnimationEvent<P>?)
+                    = PlayState.CONTINUE
+            }
+        ))
+    }
+
+    override fun getFactory() = AnimationFactory(this)
 }

@@ -14,8 +14,8 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
 
     fun <I: Item> add(
         id: String, i: I
-    ): RegistrySupplier<I>
-        = registry.register(id) { i }
+    ): I
+        = i.also { registry.register(id) { it } }
 
     inline fun <I: Item> addWithFactory(
         id: String,
@@ -25,7 +25,7 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
     inline fun add(
         id: String,
         init: Item.Settings.() -> Unit = {}
-    ): RegistrySupplier<Item> {
+    ): Item {
         val settings = defaultSettings()
         settings.init()
         return add(id, Item(settings))
@@ -35,18 +35,10 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
         id: String,
         b: B,
         init: Item.Settings.() -> Unit = {}
-    ): RegistrySupplier<BlockItem> {
+    ): BlockItem {
         return addWithFactory(id) {
             this.init()
             BlockItem(b, this)
         }
-    }
-
-    inline fun <B: Block> add(
-        id: String,
-        b: RegistrySupplier<B>,
-        init: Item.Settings.() -> Unit = {}
-    ): RegistrySupplier<BlockItem> {
-        return add(id, b.get(), init)
     }
 }

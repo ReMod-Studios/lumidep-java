@@ -13,7 +13,7 @@ object LumidepPlatformInterfaceImpl {
     @JvmStatic fun getItemGroup(): ItemGroup {
         return object : ItemGroup("lumidep.group") {
             override fun createIcon(): ItemStack {
-                return ItemStack(LumidepItems.ESCA.get())
+                return ItemStack(LumidepItems.ESCA)
             }
         }
     }
@@ -21,6 +21,7 @@ object LumidepPlatformInterfaceImpl {
     @JvmStatic
     fun registerEntityAttributes(entityType: EntityType<out LivingEntity>,
                                  attributeBuilder: DefaultAttributeContainer.Builder) {
+        //TODO use EntityAttributeCreationEvent, might need a lot of refactoring
         DefaultAttributeRegistry.put(entityType, attributeBuilder.build());
     }
 }

@@ -25,7 +25,11 @@ object LumidepEntities {
         }
     }
 
-    private fun <T: Entity> add(id: String, t: EntityType<T>) = REGISTRY.register(id) { t }
+    fun register() { REGISTRY.register() }
+
+    private fun <T: Entity> add(id: String, t: EntityType<T>)
+        = t.also { REGISTRY.register(id) { it } }
+
     private inline fun <T: Entity> add(
         id: String,
         init: EntityTypeScope<T>.() -> Unit

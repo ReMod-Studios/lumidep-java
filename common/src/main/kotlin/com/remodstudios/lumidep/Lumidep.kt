@@ -2,6 +2,7 @@ package com.remodstudios.lumidep
 
 import com.remodstudios.lumidep.block.LumidepBlocks
 import com.remodstudios.lumidep.block.entity.LumidepBlockEntities
+import com.remodstudios.lumidep.entity.LumidepEntities
 import com.remodstudios.lumidep.item.LumidepItems
 import com.remodstudios.lumidep.worldgen.LumidepBiomes
 import me.shedaniel.architectury.registry.BiomeModifications
@@ -11,10 +12,11 @@ object Lumidep {
     const val MOD_ID = "lumidep"
 
     fun init() {
+        LumidepEntities.register()
         LumidepItems.register()
         LumidepBlocks.register()
         LumidepBlockEntities.register()
-        LumidepBiomes.register()
+        //LumidepBiomes.register()
     }
 
     fun id(path: String): Identifier {

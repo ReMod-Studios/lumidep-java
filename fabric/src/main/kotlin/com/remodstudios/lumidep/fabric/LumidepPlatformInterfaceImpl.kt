@@ -15,7 +15,7 @@ object LumidepPlatformInterfaceImpl {
     @JvmStatic fun getItemGroup(): ItemGroup {
         return FabricItemGroupBuilder.build(
             id("group")
-        ) { ItemStack(LumidepItems.ESCA.get()) }
+        ) { ItemStack(LumidepItems.ESCA) }
     }
 
     @JvmStatic
