@@ -1,6 +1,5 @@
 package com.remodstudios.remodcore
 
-import com.remodstudios.lumidep.block.LumidepBlocks
 import me.shedaniel.architectury.registry.BlockProperties
 import me.shedaniel.architectury.registry.DeferredRegister
 import net.minecraft.block.Block
@@ -28,7 +27,7 @@ open class BlockRegistryHelper(
         factory: BlockProperties.() -> V,
     ): V {
         val block = prop.factory()
-        return LumidepBlocks.add(id, block)
+        return add(id, block)
     }
 
     inline fun <Original: Block, V: Block> addCopy(
