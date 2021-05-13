@@ -27,3 +27,8 @@ fun Float.toDeg() = this * 180 / PI
 fun Float.toRad() = this * PI / 180
 fun Double.toDeg() = this * 180 / PI
 fun Double.toRad() = this * PI / 180
+
+inline fun Boolean.ifTrueThenAlso(also: () -> Unit): Boolean {
+    if (this) also()
+    return this
+}
