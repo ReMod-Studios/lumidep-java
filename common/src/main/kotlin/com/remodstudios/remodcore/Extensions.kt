@@ -1,5 +1,6 @@
 package com.remodstudios.remodcore
 
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ai.goal.GoalSelector
 import net.minecraft.util.math.BlockPos
@@ -31,4 +32,10 @@ fun Double.toRad() = this * PI / 180
 inline fun Boolean.ifTrueThenAlso(also: () -> Unit): Boolean {
     if (this) also()
     return this
+}
+
+inline fun MatrixStack.frame(block: () -> Unit) {
+    this.push()
+    block()
+    this.pop()
 }
