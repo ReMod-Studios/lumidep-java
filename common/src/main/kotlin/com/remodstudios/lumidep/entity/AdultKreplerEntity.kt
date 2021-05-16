@@ -20,7 +20,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent
 import software.bernie.geckolib3.core.manager.AnimationData
 import software.bernie.geckolib3.core.manager.AnimationFactory
 
-// TODO no geckolib for now until they fix their BS - leocth
+/*
 class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: World): OceanFloorWalkerEntity(entityType, world),
     IAnimatable {
 
@@ -83,3 +83,4 @@ class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: Worl
 
     override fun getFactory() = AnimationFactory(this)
 }
+*/

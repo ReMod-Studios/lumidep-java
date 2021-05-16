@@ -2,7 +2,6 @@ package com.remodstudios.remodcore
 
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
-import net.minecraft.entity.ai.goal.GoalSelector
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Position
@@ -24,10 +23,10 @@ fun Entity.squaredDistanceTo(blockPos: BlockPos)
 fun magnitude(x: Double, y: Double, z: Double)
         = MathHelper.sqrt(x*x + y*y + z*z)
 
-fun Float.toDeg() = this * 180 / PI
-fun Float.toRad() = this * PI / 180
-fun Double.toDeg() = this * 180 / PI
-fun Double.toRad() = this * PI / 180
+fun Float.toDeg(): Float = this * 180f / PI.toFloat()
+fun Float.toRad(): Float = this * PI.toFloat() / 180f
+fun Double.toDeg(): Double = this * 180.0 / PI
+fun Double.toRad(): Double = this * PI / 180.0
 
 inline fun Boolean.ifTrueThenAlso(also: () -> Unit): Boolean {
     if (this) also()
@@ -39,3 +38,10 @@ inline fun MatrixStack.frame(block: () -> Unit) {
     block()
     this.pop()
 }
+
+operator fun Vec3d.unaryMinus(): Vec3d = this.multiply(-1.0) // can't use #negate since it's client-side only :mojank:
+
+operator fun Vec3d.plus(by: Vec3d): Vec3d = this.add(by)
+operator fun Vec3d.minus(by: Vec3d): Vec3d = this.subtract(by)
+operator fun Vec3d.times(by: Double): Vec3d = this.multiply(by)
+operator fun Vec3d.div(by: Double): Vec3d = this.multiply(1 / by)

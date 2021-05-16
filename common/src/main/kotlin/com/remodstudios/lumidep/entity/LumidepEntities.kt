@@ -25,6 +25,28 @@ object LumidepEntities {
         }
     }
 
+    val ANGLERFISH = addLiving<AnglerfishEntity>("anglerfish") {
+        type {
+            spawnGroup = SpawnGroup.WATER_CREATURE
+            factory(::AnglerfishEntity)
+            config {
+                setDimensions(0.9f, 0.6f)
+            }
+            attributes = AnglerfishEntity.createAttributes()
+        }
+    }
+
+    val NOT_ANGLERFISH = addLiving<NotAnglerfishEntity>("not_anglerfish") {
+        type {
+            spawnGroup = SpawnGroup.WATER_CREATURE
+            factory(::NotAnglerfishEntity)
+            config {
+                setDimensions(0.9f, 0.6f)
+            }
+            attributes = NotAnglerfishEntity.createAttributes()
+        }
+    }
+
     fun register() { REGISTRY.register() }
 
     private fun <T: Entity> add(id: String, t: EntityType<T>)

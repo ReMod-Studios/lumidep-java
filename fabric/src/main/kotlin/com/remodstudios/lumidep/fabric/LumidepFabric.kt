@@ -4,6 +4,7 @@ import com.remodstudios.lumidep.Lumidep
 import com.remodstudios.lumidep.client.LumidepClient
 import com.remodstudios.lumidep.entity.LumidepEntities
 import com.remodstudios.lumidep.fabric.client.render.entity.AdultKreplerEntityRenderer
+import com.remodstudios.lumidep.fabric.client.render.entity.AnglerfishEntityRenderer
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -24,6 +25,8 @@ object LumidepFabricClient: ClientModInitializer {
         LumidepClient.init()
         with(EntityRendererRegistry.INSTANCE) {
             register(LumidepEntities.ADULT_KREPLER, ::AdultKreplerEntityRenderer)
+            register(LumidepEntities.ANGLERFISH, ::AnglerfishEntityRenderer)
+            register(LumidepEntities.NOT_ANGLERFISH, ::AnglerfishEntityRenderer)
         }
     }
 }

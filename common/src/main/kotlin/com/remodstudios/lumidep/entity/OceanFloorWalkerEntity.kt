@@ -52,21 +52,21 @@ open class OceanFloorWalkerEntity(entityType: EntityType<out WaterCreatureEntity
     }
 
     override fun initGoals() {
-        with(goalSelector) {
-            add(1, WanderAroundOnSurfaceGoal(1.0))
-            add(5, LeaveWaterGoal(1.0))
-            add(6, TargetAboveWaterGoal(1.0, world.seaLevel))
-            add(7, WanderAroundGoal(thisMob, 1.0))
-        }
-        with(targetSelector) {
-            add(1, RevengeGoal(thisMob,
+        //with(goalSelector) {
+        goalSelector.add(1, WanderAroundOnSurfaceGoal(1.0))
+        goalSelector.add(5, LeaveWaterGoal(1.0))
+        goalSelector.add(6, TargetAboveWaterGoal(1.0, world.seaLevel))
+        goalSelector.add(7, WanderAroundGoal(thisMob, 1.0))
+        //}
+        //with(targetSelector) {
+        goalSelector.add(1, RevengeGoal(thisMob,
                 OceanFloorWalkerEntity::class.java,
                 GuardianEntity::class.java,
                 /* GorgeBeastEntity::class.java, TODO */
             ).setGroupRevenge(ZombifiedPiglinEntity::class.java))
-            add(2, FollowTargetGoal(thisMob, PlayerEntity::class.java, true, false))
-            add(3, FollowTargetGoal(thisMob, TurtleEntity::class.java, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER))
-        }
+        goalSelector.add(2, FollowTargetGoal(thisMob, PlayerEntity::class.java, true, false))
+        goalSelector.add(3, FollowTargetGoal(thisMob, TurtleEntity::class.java, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER))
+        //}
     }
 
     override fun travel(input: Vec3d) {
