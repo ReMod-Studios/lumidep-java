@@ -6,6 +6,7 @@ import com.remodstudios.remodcore.toRad
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.SwimNavigation
+import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.GuardianEntity
@@ -26,8 +27,13 @@ import software.bernie.geckolib3.core.controller.AnimationController
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent
 import software.bernie.geckolib3.core.manager.AnimationData
 import software.bernie.geckolib3.core.manager.AnimationFactory
+import kotlin.math.roundToInt
 
-class AnglerfishEntity(entityType: EntityType<AnglerfishEntity>, world: World): WaterCreatureEntity(entityType, world), IAnimatable {
+class AnglerfishEntity(
+    entityType: EntityType<AnglerfishEntity>,
+    world: World
+): WaterCreatureEntity(entityType, world), IAnimatable {
+    private val factory = AnimationFactory(this)
 
     init {
         moveControl = AquaticMoveControl(this, 85, 10, 0.02f, 0.1f, true)
@@ -35,43 +41,50 @@ class AnglerfishEntity(entityType: EntityType<AnglerfishEntity>, world: World): 
         setCanPickUpLoot(true)
     }
 
-    override fun getMaxAir() = 4800
-    override fun getNextAirOnLand(air: Int) = maxAir
-    override fun getActiveEyeHeight(entityPose: EntityPose, entityDimensions: EntityDimensions) = 0.3f
-    override fun getLookPitchSpeed() = 1
-    override fun getBodyYawSpeed() = 1
-
     override fun initialize(
-        serverWorldAccess: ServerWorldAccess,
-        localDifficulty: LocalDifficulty,
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
         entityData: EntityData?,
-        compoundTag: CompoundTag?
+        entityTag: CompoundTag?
     ): EntityData? {
         air = maxAir
         pitch = 0f
-        return super.initialize(serverWorldAccess, localDifficulty, spawnReason, entityData, compoundTag)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityTag)
     }
 
     override fun initGoals() {
         val thisMob = this@AnglerfishEntity
-        goalSelector.add(0, BreatheAirGoal(thisMob))
-        goalSelector.add(0, MoveIntoWaterGoal(thisMob))
+        with(goalSelector) {
+            add(0, BreatheAirGoal(thisMob))
+            add(0, MoveIntoWaterGoal(thisMob))
 
-        goalSelector.add(3, FleeEntityGoal(thisMob, GuardianEntity::class.java, 8f, 1.0, 1.0))
-        //goalSelector.add(3, FleeEntityGoal(thisMob, GoblinSharkEntity::class.java, 8f, 1.0, 1.0))
+            add(3, FleeEntityGoal(thisMob, GuardianEntity::class.java, 8f, 1.0, 1.0))
+            //goalSelector.add(3, FleeEntityGoal(thisMob, GoblinSharkEntity::class.java, 8f, 1.0, 1.0))
 
-        goalSelector.add(4, SwimAroundGoal(thisMob, 1.0, 10))
-        goalSelector.add(4, MeleeAttackGoal(thisMob, 1.2, true))
-        goalSelector.add(4, LookAroundGoal(thisMob))
+            add(4, SwimAroundGoal(thisMob, 1.0, 10))
+            add(4, MeleeAttackGoal(thisMob, 1.2, true))
+            add(4, LookAroundGoal(thisMob))
 
-        goalSelector.add(5, LookAtEntityGoal(thisMob, PlayerEntity::class.java, 6f))
-        goalSelector.add(8, ChaseBoatGoal(thisMob))
+            add(5, LookAtEntityGoal(thisMob, PlayerEntity::class.java, 6f))
+            add(8, ChaseBoatGoal(thisMob))
+        }
 
-        targetSelector.add(1, RevengeGoal(thisMob, GuardianEntity::class.java).setGroupRevenge())
+        with(targetSelector) {
+            add(1, RevengeGoal(thisMob, GuardianEntity::class.java).setGroupRevenge())
+        }
     }
 
-    override fun createNavigation(world: World) = SwimNavigation(this, world)
+    override fun createNavigation(world: World?) = SwimNavigation(this, world)
+
+    companion object {
+        fun createAttributes(): DefaultAttributeContainer.Builder? {
+            return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+        }
+    }
 
     override fun tick() {
         super.tick()
@@ -107,43 +120,46 @@ class AnglerfishEntity(entityType: EntityType<AnglerfishEntity>, world: World): 
         }
     }
 
+
     override fun tryAttack(target: Entity)
         = target.damage(
             DamageSource.mob(this),
-            getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+            getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).roundToInt().toFloat()
         ).ifTrueThenAlso {
             dealDamage(this, target)
             playSound(SoundEvents.ENTITY_DOLPHIN_ATTACK, 1f, 1f)
         }
 
-    override fun travel(input: Vec3d) {
+    override fun getMaxAir() = 4800
+    override fun getNextAirOnLand(air: Int) = maxAir
+    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions) = 0.3f
+    override fun getLookPitchSpeed() = 1
+    override fun getBodyYawSpeed() = 1
+
+    override fun travel(movementInput: Vec3d) {
         if (canMoveVoluntarily() && isTouchingWater) {
-            updateVelocity(movementSpeed, input)
+            updateVelocity(movementSpeed, movementInput)
             move(MovementType.SELF, velocity)
             velocity *= 0.9
             if (target == null)
-                addVelocity(0.0, -0.005, 0.0)
+                velocity = velocity.add(0.0, -0.005, 0.0)
         } else {
-            super.travel(input)
+            super.travel(movementInput)
         }
     }
 
-    companion object {
-        fun createAttributes() = MobEntity.createMobAttributes()
-            .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
-            .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
-            .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+    override fun registerControllers(animationData: AnimationData) {
+        animationData.addAnimationController(
+            AnimationController(this, "controller", 0f,
+                PredicateWrapper { PlayState.CONTINUE })
+        )
     }
 
-    override fun registerControllers(data: AnimationData) {
-        data.addAnimationController(AnimationController(
-            this, "controller", 0f,
-            // the fact that i have to do this makes me angry
-            PredicateWrapper { PlayState.CONTINUE }
-        ))
+    override fun getFactory(): AnimationFactory {
+        return factory
     }
 
-    override fun getFactory() = AnimationFactory(this)
+    override fun tickWaterBreathingAir(air: Int) {}
 }
 
 typealias Pred<T> = (AnimationEvent<T>) -> PlayState
@@ -152,5 +168,3 @@ typealias Pred<T> = (AnimationEvent<T>) -> PlayState
 value class PredicateWrapper<T: IAnimatable>(val pred: Pred<*>): AnimationController.IAnimationPredicate<T> {
     override fun <P : IAnimatable> test(event: AnimationEvent<P>): PlayState = pred(event)
 }
-
-class LessBadAnimationController

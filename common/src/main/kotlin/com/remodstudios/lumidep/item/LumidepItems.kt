@@ -44,7 +44,8 @@ object LumidepItems: ItemRegistryHelper(Lumidep.MOD_ID) {
     val BRACKWOOD_FENCE_GATE = add("brackwood_fence_gate", Lb.BRACKWOOD_FENCE_GATE);
 
     val ADULT_KREPLER_SPAWN_EGG = addWithFactory("adult_krepler_spawn_egg") { SpawnEggItem(Le.ADULT_KREPLER, 0x5D703B, 0x963B12, this) }
-    /* TODO entities
+    val ANGLERFISH_SPAWN_EGG = addWithFactory("anglerfish_spawn_egg") { SpawnEggItem(Le.ANGLERFISH, 0x29292D, 0xA7B1FB, this) }
+  /* TODO entities
     val BROKEN_GUARDIAN_SPAWN_EGG = add("broken_guardian_spawn_egg") { SpawnEggItem(Le.BROKEN_GUARDIAN, 0x5D6362, 0x744332, this) };
     val GOBLIN_SHARK_SPAWN_EGG = add("goblin_shark_spawn_egg") { SpawnEggItem(Le.GOBLIN_SHARK, 0x93688C, 0xA57B97, this) };
     val GORGE_BEAST_SPAWN_EGG = add("gorge_beast_spawn_egg") { SpawnEggItem(Le.GORGE_BEAST, 0x1A282D, 0x00FF93, this) };

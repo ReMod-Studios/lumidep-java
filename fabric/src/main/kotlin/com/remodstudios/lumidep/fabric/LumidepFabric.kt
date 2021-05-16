@@ -26,7 +26,6 @@ object LumidepFabricClient: ClientModInitializer {
         with(EntityRendererRegistry.INSTANCE) {
             register(LumidepEntities.ADULT_KREPLER, ::AdultKreplerEntityRenderer)
             register(LumidepEntities.ANGLERFISH, ::AnglerfishEntityRenderer)
-            register(LumidepEntities.NOT_ANGLERFISH, ::AnglerfishEntityRenderer)
         }
     }
 }
