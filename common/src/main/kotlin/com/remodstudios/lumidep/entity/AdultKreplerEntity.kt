@@ -19,10 +19,12 @@ import software.bernie.geckolib3.core.controller.AnimationController
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent
 import software.bernie.geckolib3.core.manager.AnimationData
 import software.bernie.geckolib3.core.manager.AnimationFactory
+import kotlin.math.roundToInt
 
-/*
-class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: World): OceanFloorWalkerEntity(entityType, world),
-    IAnimatable {
+class AdultKreplerEntity(
+    entityType: EntityType<out AdultKreplerEntity>,
+    world: World
+) : OceanFloorWalkerEntity(entityType, world), IAnimatable {
 
     override fun getMaxAir() = 4800
     override fun getNextAirOnLand(air: Int) = maxAir
@@ -56,7 +58,7 @@ class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: Worl
     override fun tryAttack(target: Entity)
         = target.damage(
             DamageSource.mob(this),
-            getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat()
+            getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).roundToInt().toFloat()
         ).ifTrueThenAlso {
             dealDamage(this, target)
             playSound(SoundEvents.ENTITY_DOLPHIN_ATTACK, 1f, 1f)
@@ -73,14 +75,9 @@ class AdultKreplerEntity(entityType: EntityType<AdultKreplerEntity>, world: Worl
     override fun registerControllers(data: AnimationData) {
         data.addAnimationController(AnimationController(
             this, "controller", 0f,
-            // the fact that i have to do this makes me angry
-            object: AnimationController.IAnimationPredicate<AdultKreplerEntity> {
-                override fun <P : IAnimatable?> test(p0: AnimationEvent<P>?)
-                    = PlayState.CONTINUE
-            }
+            PredicateWrapper { PlayState.CONTINUE }
         ))
     }
 
     override fun getFactory() = AnimationFactory(this)
 }
-*/

@@ -158,8 +158,6 @@ class AnglerfishEntity(
     override fun getFactory(): AnimationFactory {
         return factory
     }
-
-    override fun tickWaterBreathingAir(air: Int) {}
 }
 
 typealias Pred<T> = (AnimationEvent<T>) -> PlayState
