@@ -18,7 +18,16 @@
     "client": [{
       "adapter": "kotlin",
       "value": "com.remodstudios.lumidep.fabric.LumidepFabricClient"
+    }],
+    "cardinal-components-entity": [{
+      "adapter": "kotlin",
+      "value": "com.remodstudios.lumidep.data.fabric.Components"
     }]
+  },
+  "custom": {
+    "cardinal-components": [
+      "lumidep:dose_counter"
+    ]
   },
   "mixins": [
     "lumidep.mixins.json"

@@ -1,4 +1,4 @@
-package com.remodstudios.lumidep.fabric.client.render.entity
+package com.remodstudios.lumidep.client.render.entity.fabric
 
 import com.remodstudios.lumidep.Lumidep
 import net.minecraft.util.Identifier

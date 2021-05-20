@@ -1,6 +1,7 @@
 package com.remodstudios.lumidep.fabric
 
 import com.remodstudios.lumidep.Lumidep.id
+import com.remodstudios.lumidep.data.fabric.Components
 import com.remodstudios.lumidep.item.LumidepItems
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -26,8 +27,8 @@ object LumidepPlatformInterfaceImpl {
     }
 
     @JvmStatic
-    fun getDosage(user: PlayerEntity): Int { TODO() }
+    fun getDose(user: PlayerEntity): Double = Components.DOSE_COUNTER[user].currentDose
 
     @JvmStatic
-    fun setDosage(user: PlayerEntity, value: Int) { TODO() }
+    fun setDose(user: PlayerEntity, value: Double) { Components.DOSE_COUNTER[user].currentDose = value }
 }

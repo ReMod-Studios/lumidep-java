@@ -1,6 +1,6 @@
-package com.remodstudios.lumidep.fabric.client.render.entity
+package com.remodstudios.lumidep.client.render.entity.fabric
 
-import com.remodstudios.lumidep.entity.AnglerfishEntity
+import com.remodstudios.lumidep.client.render.entity.AnglerfishEntity
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
 import net.minecraft.client.render.entity.EntityRenderDispatcher
 import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer

@@ -1,4 +1,4 @@
-package com.remodstudios.lumidep.entity
+package com.remodstudios.lumidep.client.render.entity
 
 import com.remodstudios.remodcore.toDeg
 import com.remodstudios.remodcore.toRad

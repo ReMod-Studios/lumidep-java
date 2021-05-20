@@ -7,11 +7,8 @@ import me.shedaniel.architectury.registry.DeferredRegister
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.*
 import net.minecraft.recipe.Ingredient
-import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.registry.Registry
-import com.remodstudios.lumidep.block.LumidepBlocks as Lb
-import com.remodstudios.lumidep.entity.LumidepEntities as Le
 
 object LumidepItems: ItemRegistryHelper(Lumidep.MOD_ID) {
     val REGISTRY = DeferredRegister.create(Lumidep.MOD_ID, Registry.ITEM_KEY)
@@ -29,15 +26,15 @@ object LumidepItems: ItemRegistryHelper(Lumidep.MOD_ID) {
     val SHINY_PEARL = add("shiny_pearl")
 
     // diver's suit
-    val DIVING_HELMET = add("diving_helmet") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.HEAD, it) }
-    val REVERBERATING_CHESTPLATE = add("reverberating_chestplate") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.CHEST, it) }
-    val BUOYANT_LEGGINGS = add("buoyant_leggings") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.LEGS, it) }
-    val HEAVY_BOOTS = add("heavy_boots") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.FEET, it) }
+    val DIVING_HELMET = addWithFactory("diving_helmet") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.HEAD, it) }
+    val REVERBERATING_CHESTPLATE = addWithFactory("reverberating_chestplate") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.CHEST, it) }
+    val BUOYANT_LEGGINGS = addWithFactory("buoyant_leggings") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.LEGS, it) }
+    val HEAVY_BOOTS = addWithFactory("heavy_boots") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.FEET, it) }
     // TODO: how do we implement this?
     val PEARL_LAMP = add("pearl_lamp")
 
     // good shit
-    val KELPFRUIT_POWDER = add("kelpfruit_powder", ::KelpfruitPowderItem)
+    val KELPFRUIT_POWDER = addWithFactory("kelpfruit_powder", ::KelpfruitPowderItem)
 
 /*
     val TUNGSTEN_BLOCK = add("tungsten_block", Lb.TUNGSTEN_BLOCK);

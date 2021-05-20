@@ -16,9 +16,3 @@ internal fun registerEntityAttributes(entityType: EntityType<out LivingEntity>,
                                       attributeBuilder: DefaultAttributeContainer.Builder) {
     throw AssertionError()
 }
-
-@ExpectPlatform
-internal fun getDosage(user: PlayerEntity): Int { throw AssertionError() }
-
-@ExpectPlatform
-internal fun setDosage(user: PlayerEntity, value: Int) { throw AssertionError() }

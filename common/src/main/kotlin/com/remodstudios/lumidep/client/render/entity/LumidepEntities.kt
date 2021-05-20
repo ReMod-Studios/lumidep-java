@@ -1,4 +1,4 @@
-package com.remodstudios.lumidep.entity
+package com.remodstudios.lumidep.client.render.entity
 
 import com.remodstudios.lumidep.Lumidep
 import com.remodstudios.lumidep.registerEntityAttributes
