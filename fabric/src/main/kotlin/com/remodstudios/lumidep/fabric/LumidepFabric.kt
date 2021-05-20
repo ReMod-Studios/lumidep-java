@@ -18,13 +18,6 @@ import net.minecraft.item.Items
 object LumidepFabric: ModInitializer {
     override fun onInitialize() {
         Lumidep.init()
-
-        registerFuel()
-    }
-
-    private fun registerFuel() {
-        // TODO: make this configurable?
-        FuelRegistry.INSTANCE.add(LumidepItems.TUNGSTEN_CARBON, 1920) // 1.2x coal
     }
 }
 

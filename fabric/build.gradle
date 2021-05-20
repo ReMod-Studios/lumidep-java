@@ -14,6 +14,7 @@ architectury {
 repositories {
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     mavenCentral()
+    maven { url 'https://ladysnake.jfrog.io/artifactory/mods'}
 }
 
 dependencies {
@@ -23,6 +24,11 @@ dependencies {
     modApi "me.shedaniel:architectury-fabric:${rootProject.architectury_version}"
     modImplementation "software.bernie.geckolib:geckolib-fabric-${rootProject.minecraft_version}:${rootProject.geckolib_version}:dev"
     modImplementation "net.fabricmc:fabric-language-kotlin:${rootProject.flk_version}+kotlin.${rootProject.kotlin_version}"
+
+    ["base", "entity"].forEach {
+        modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-$it:${rootProject.cca_version}"
+        include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-$it:${rootProject.cca_version}"
+    }
 
     implementation(project(path: ":common")) {
         transitive = false

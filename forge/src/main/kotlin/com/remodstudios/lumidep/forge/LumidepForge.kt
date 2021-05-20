@@ -32,15 +32,6 @@ object LumidepForge {
         Lumidep.init();
     }
 
-    @SubscribeEvent
-    private fun onFurnaceFuelBurnTimeEvent(event: FurnaceFuelBurnTimeEvent) {
-        // ugly workaround
-        if (event.itemStack.item == LumidepItems.TUNGSTEN_CARBON) {
-            event.burnTime = 1920 // 1.2x coal
-            event.result = Event.Result.ALLOW
-        }
-    }
-
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LumidepClient.init()
         RenderingRegistry.registerEntityRenderingHandler(LumidepEntities.ADULT_KREPLER, ::AdultKreplerEntityRenderer)

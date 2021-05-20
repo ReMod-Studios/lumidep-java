@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 
@@ -15,7 +16,7 @@ object LumidepPlatformInterfaceImpl {
     @JvmStatic fun getItemGroup(): ItemGroup {
         return FabricItemGroupBuilder.build(
             id("group")
-        ) { ItemStack(LumidepItems.ESCA) }
+        ) { ItemStack(LumidepItems.ESCA_LURE) }
     }
 
     @JvmStatic
@@ -23,4 +24,10 @@ object LumidepPlatformInterfaceImpl {
                                  attributeBuilder: DefaultAttributeContainer.Builder) {
         FabricDefaultAttributeRegistry.register(entityType, attributeBuilder)
     }
+
+    @JvmStatic
+    fun getDosage(user: PlayerEntity): Int { TODO() }
+
+    @JvmStatic
+    fun setDosage(user: PlayerEntity, value: Int) { TODO() }
 }

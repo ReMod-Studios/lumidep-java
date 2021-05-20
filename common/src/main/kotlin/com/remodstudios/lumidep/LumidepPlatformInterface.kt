@@ -5,13 +5,20 @@ import me.shedaniel.architectury.annotations.ExpectPlatform
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemGroup
 
 @ExpectPlatform
-fun getItemGroup(): ItemGroup = throw AssertionError()
+internal fun getItemGroup(): ItemGroup = throw AssertionError()
 
 @ExpectPlatform
-fun registerEntityAttributes(entityType: EntityType<out LivingEntity>,
-                             attributeBuilder: DefaultAttributeContainer.Builder) {
+internal fun registerEntityAttributes(entityType: EntityType<out LivingEntity>,
+                                      attributeBuilder: DefaultAttributeContainer.Builder) {
     throw AssertionError()
 }
+
+@ExpectPlatform
+internal fun getDosage(user: PlayerEntity): Int { throw AssertionError() }
+
+@ExpectPlatform
+internal fun setDosage(user: PlayerEntity, value: Int) { throw AssertionError() }
