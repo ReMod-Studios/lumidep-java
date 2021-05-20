@@ -8,9 +8,9 @@ import nerdhub.cardinal.components.api.util.RespawnCopyStrategy
 
 object Components: EntityComponentInitializer {
     val DOSE_COUNTER =
-        ComponentRegistryV3.INSTANCE.getOrCreate(Lumidep.id("dose_counter"), DoseCounterComponent::class.java)
+        ComponentRegistryV3.INSTANCE.getOrCreate(Lumidep.id("dose_counter"), DoseCounterComponentImpl::class.java)
 
     override fun registerEntityComponentFactories(registry: EntityComponentFactoryRegistry) {
-        registry.registerForPlayers(DOSE_COUNTER, { DoseCounterComponent() }, RespawnCopyStrategy.LOSSLESS_ONLY)
+        registry.registerForPlayers(DOSE_COUNTER, { DoseCounterComponentImpl() }, RespawnCopyStrategy.LOSSLESS_ONLY)
     }
 }

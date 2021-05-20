@@ -13,7 +13,7 @@ object LumidepPlatformInterfaceImpl {
     @JvmStatic fun getItemGroup(): ItemGroup {
         return object : ItemGroup("lumidep.group") {
             override fun createIcon(): ItemStack {
-                return ItemStack(LumidepItems.ESCA)
+                return ItemStack(LumidepItems.ESCA_LURE)
             }
         }
     }
