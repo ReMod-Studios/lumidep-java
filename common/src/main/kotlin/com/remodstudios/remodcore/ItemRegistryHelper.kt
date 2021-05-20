@@ -1,7 +1,6 @@
 package com.remodstudios.remodcore
 
 import me.shedaniel.architectury.registry.DeferredRegister
-import me.shedaniel.architectury.registry.RegistrySupplier
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
@@ -19,26 +18,26 @@ open class ItemRegistryHelper(registry: DeferredRegister<Item>): RegistryHelper<
 
     inline fun <I: Item> addWithFactory(
         id: String,
-        factory: Item.Settings.() -> I
+        factory: (Item.Settings) -> I
     ) = add(id, factory(defaultSettings()))
 
     inline fun add(
         id: String,
-        init: Item.Settings.() -> Unit = {}
+        init: (Item.Settings) -> Unit = {}
     ): Item {
         val settings = defaultSettings()
-        settings.init()
+        init(settings)
         return add(id, Item(settings))
     }
 
     inline fun <B: Block> add(
         id: String,
         b: B,
-        init: Item.Settings.() -> Unit = {}
+        init: (Item.Settings) -> Unit = {}
     ): BlockItem {
         return addWithFactory(id) {
-            this.init()
-            BlockItem(b, this)
+            init(it)
+            BlockItem(b, it)
         }
     }
 }

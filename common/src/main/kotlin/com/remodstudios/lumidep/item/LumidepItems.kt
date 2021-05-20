@@ -4,8 +4,11 @@ import com.remodstudios.lumidep.Lumidep
 import com.remodstudios.lumidep.getItemGroup
 import com.remodstudios.remodcore.ItemRegistryHelper
 import me.shedaniel.architectury.registry.DeferredRegister
-import net.minecraft.item.Item
-import net.minecraft.item.SpawnEggItem
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.item.*
+import net.minecraft.recipe.Ingredient
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.registry.Registry
 import com.remodstudios.lumidep.block.LumidepBlocks as Lb
 import com.remodstudios.lumidep.entity.LumidepEntities as Le
@@ -16,10 +19,27 @@ object LumidepItems: ItemRegistryHelper(Lumidep.MOD_ID) {
 
     override fun defaultSettings(): Item.Settings = Item.Settings().group(GROUP)
 
-    val ESCA = add("esca")
-    val TUNGSTEN_INGOT = add("tungsten_ingot")
+    // crafting materials
     val TUNGSTEN_NUGGET = add("tungsten_nugget")
+    val TUNGSTEN_INGOT = add("tungsten_ingot")
+    val TUNGSTEN_CARBON = add("tungsten_carbon")
+    val ESCA_LURE = add("esca_lure")
+    val GORGEBEAST_CORDS = add("gorgebeast_cords")
+    val ISOPOD_CARAPACE = add("isopod_carapace")
+    val SHINY_PEARL = add("shiny_pearl")
 
+    // diver's suit
+    val DIVING_HELMET = add("diving_helmet") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.HEAD, it) }
+    val REVERBERATING_CHESTPLATE = add("reverberating_chestplate") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.CHEST, it) }
+    val BUOYANT_LEGGINGS = add("buoyant_leggings") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.LEGS, it) }
+    val HEAVY_BOOTS = add("heavy_boots") { ArmorItem(DiversSuitArmorMaterial, EquipmentSlot.FEET, it) }
+    // TODO: how do we implement this?
+    val PEARL_LAMP = add("pearl_lamp")
+
+    // good shit
+    val KELPFRUIT_POWDER = add("kelpfruit_powder", ::KelpfruitPowderItem)
+
+/*
     val TUNGSTEN_BLOCK = add("tungsten_block", Lb.TUNGSTEN_BLOCK);
     val TUNGSTEN_DEPOSIT = add("tungsten_deposit", Lb.TUNGSTEN_DEPOSIT);
     val BLACK_SAND = add("black_sand", Lb.BLACK_SAND);
@@ -45,12 +65,40 @@ object LumidepItems: ItemRegistryHelper(Lumidep.MOD_ID) {
 
     val ADULT_KREPLER_SPAWN_EGG = addWithFactory("adult_krepler_spawn_egg") { SpawnEggItem(Le.ADULT_KREPLER, 0x5D703B, 0x963B12, this) }
     val ANGLERFISH_SPAWN_EGG = addWithFactory("anglerfish_spawn_egg") { SpawnEggItem(Le.ANGLERFISH, 0x29292D, 0xA7B1FB, this) }
-  /* TODO entities
+
     val BROKEN_GUARDIAN_SPAWN_EGG = add("broken_guardian_spawn_egg") { SpawnEggItem(Le.BROKEN_GUARDIAN, 0x5D6362, 0x744332, this) };
     val GOBLIN_SHARK_SPAWN_EGG = add("goblin_shark_spawn_egg") { SpawnEggItem(Le.GOBLIN_SHARK, 0x93688C, 0xA57B97, this) };
     val GORGE_BEAST_SPAWN_EGG = add("gorge_beast_spawn_egg") { SpawnEggItem(Le.GORGE_BEAST, 0x1A282D, 0x00FF93, this) };
     val ISOPOD_SPAWN_EGG = add("isopod_spawn_egg") { SpawnEggItem(Le.ISOPOD, 0x9D555D, 0xB68579, this) };
     val MANTARAY_SPAWN_EGG = add("mantaray_spawn_egg") { SpawnEggItem(Le.MANTARAY, 0x110F17, 0x888893, this) };
      */
+}
+
+object DiversSuitArmorMaterial: ArmorMaterial {
+    private const val DURABILITY_MULTIPLIER = 25
+    private val BASE_DURABILITY = mapOf(
+        EquipmentSlot.HEAD to 13,
+        EquipmentSlot.CHEST to 15,
+        EquipmentSlot.LEGS to 16,
+        EquipmentSlot.FEET to 11,
+    )
+    private val PROTECTION_VALUES = mapOf(
+        EquipmentSlot.HEAD to 3,
+        EquipmentSlot.CHEST to 7,
+        EquipmentSlot.LEGS to 5,
+        EquipmentSlot.FEET to 3,
+    )
+
+    override fun getDurability(slot: EquipmentSlot) = (BASE_DURABILITY[slot] ?: 0) * DURABILITY_MULTIPLIER
+
+    override fun getProtectionAmount(slot: EquipmentSlot) = PROTECTION_VALUES[slot] ?: 0
+
+    override fun getEnchantability() = 10
+    // maybe we can make our own equip sound
+    override fun getEquipSound() = SoundEvents.ITEM_ARMOR_EQUIP_IRON
+    override fun getRepairIngredient() = Ingredient.ofItems(LumidepItems.TUNGSTEN_INGOT)
+    override fun getName() = "divers_suit"
+    override fun getToughness() = 0.3f
+    override fun getKnockbackResistance() = 0.0f
 }
 
