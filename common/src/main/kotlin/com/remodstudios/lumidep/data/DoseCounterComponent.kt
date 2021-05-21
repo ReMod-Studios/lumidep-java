@@ -4,20 +4,25 @@ import me.shedaniel.architectury.annotations.ExpectPlatform
 import net.minecraft.entity.player.PlayerEntity
 import kotlin.math.exp
 
-interface DoseCounterComponent {
-    var currentDose: Double
-    var ticksSinceIntoxicated: Long
-
-    fun tick() {
-        if (currentDose < 0) {
-            currentDose = 0.0 // reset
-            ticksSinceIntoxicated = 0L
-            return
-        } else if (currentDose == 0.0) {
-            return
+abstract class DoseCounterComponent {
+    var currentDose = 0.0
+        set(value) {
+            intoxicated = value > 0.0
+            field = if (value < 0.0) {
+                ticksSinceIntoxicated = 0L
+                0.0
+            } else {
+                value
+            }
         }
-        currentDose *= exp(-ticksSinceIntoxicated.toDouble())
-        ticksSinceIntoxicated++
+    var ticksSinceIntoxicated = 0L
+    private var intoxicated = false
+
+    fun tickLogic() {
+        if (intoxicated) {
+            currentDose *= exp(-ticksSinceIntoxicated.toDouble())
+            ticksSinceIntoxicated++
+        }
     }
 
     companion object {

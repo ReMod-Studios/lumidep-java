@@ -10,10 +10,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.minecraftforge.common.util.LazyOptional
 
-class DoseCounterComponentImpl: DoseCounterComponent {
-    override var currentDose = 0.0
-    override var ticksSinceIntoxicated = 0L
-}
+class DoseCounterComponentImpl: DoseCounterComponent()
 
 class DoseCounterStorage: Capability.IStorage<DoseCounterComponent> {
     override fun writeNBT(

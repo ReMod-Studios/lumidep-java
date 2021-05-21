@@ -16,7 +16,6 @@ import net.minecraftforge.common.capabilities.CapabilityManager
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.DeferredWorkQueue
 import net.minecraftforge.fml.client.registry.RenderingRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
@@ -58,7 +57,7 @@ object LumidepForge {
         val capability = event.player.getCapability(DoseCounterProvider.DOSE_COUNTER)
         capability.ifPresent {
             println("before: dose = ${it.currentDose}, ticks = ${it.ticksSinceIntoxicated}")
-            it.tick()
+            it.tickLogic()
             println("after: dose = ${it.currentDose}, ticks = ${it.ticksSinceIntoxicated}")
             println()
         }

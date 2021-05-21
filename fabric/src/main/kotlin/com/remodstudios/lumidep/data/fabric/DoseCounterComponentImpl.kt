@@ -7,13 +7,10 @@ import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundTag
 
-class DoseCounterComponentImpl: DoseCounterComponent, Component, CommonTickingComponent, AutoSyncedComponent {
-    override var currentDose = 0.0
-    override var ticksSinceIntoxicated = 0L
-
+class DoseCounterComponentImpl: DoseCounterComponent(), Component, CommonTickingComponent, AutoSyncedComponent {
     override fun readFromNbt(tag: CompoundTag) {
         currentDose = tag.getDouble("currentDose")
-        ticksSinceIntoxicated = tag.getLong("ticksSinceIntoxicated ")
+        ticksSinceIntoxicated = tag.getLong("ticksSinceIntoxicated")
     }
 
     override fun writeToNbt(tag: CompoundTag) {
@@ -22,7 +19,7 @@ class DoseCounterComponentImpl: DoseCounterComponent, Component, CommonTickingCo
     }
 
     override fun tick() {
-        super.tick()
+        tickLogic()
     }
 }
 

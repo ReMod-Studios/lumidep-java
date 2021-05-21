@@ -1,6 +1,5 @@
 package com.remodstudios.remodcore
 
-import com.sun.org.apache.xpath.internal.operations.Bool
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.StatusEffect
