@@ -1,5 +1,8 @@
 package com.remodstudios.remodcore
 
+import net.minecraft.client.render.BufferBuilder
+import net.minecraft.client.render.VertexFormat
+import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.StatusEffect
@@ -59,3 +62,6 @@ fun PlayerEntity.applyStatusEffect(type: StatusEffect,
 {
     applyStatusEffect(StatusEffectInstance(type, duration, amplifier, ambient, showParticles, showIcon, hiddenEffect))
 }
+
+fun argb(a: Int = 255, r: Int, g: Int, b: Int)
+    = (a and 0xff shl 24) or (r and 0xff shl 16) or (g and 0xff shl 8) or (b and 0xff)

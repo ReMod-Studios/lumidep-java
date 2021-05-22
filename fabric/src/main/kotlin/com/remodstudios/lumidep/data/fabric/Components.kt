@@ -11,6 +11,6 @@ object Components: EntityComponentInitializer {
         ComponentRegistryV3.INSTANCE.getOrCreate(Lumidep.id("dose_counter"), DoseCounterComponentImpl::class.java)
 
     override fun registerEntityComponentFactories(registry: EntityComponentFactoryRegistry) {
-        registry.registerForPlayers(DOSE_COUNTER, { DoseCounterComponentImpl() }, RespawnCopyStrategy.LOSSLESS_ONLY)
+        registry.registerForPlayers(DOSE_COUNTER, ::DoseCounterComponentImpl, RespawnCopyStrategy.LOSSLESS_ONLY)
     }
 }

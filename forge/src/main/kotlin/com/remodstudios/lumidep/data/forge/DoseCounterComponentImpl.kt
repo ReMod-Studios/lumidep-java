@@ -10,7 +10,12 @@ import net.minecraftforge.common.capabilities.CapabilityInject
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.minecraftforge.common.util.LazyOptional
 
-class DoseCounterComponentImpl: DoseCounterComponent()
+// TODO
+class DoseCounterComponentImpl : DoseCounterComponent(0) {
+    override fun sync() {
+        // TODO: make packets and shit
+    }
+}
 
 class DoseCounterStorage: Capability.IStorage<DoseCounterComponent> {
     override fun writeNBT(
