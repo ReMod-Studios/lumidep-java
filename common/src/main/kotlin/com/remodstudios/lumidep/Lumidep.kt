@@ -27,13 +27,10 @@ object Lumidep {
         TickEvent.PLAYER_PRE.register {
             val counter = DoseCounterComponent.get(it)
 
-            println(counter.currentDose)
-            println(counter.ticksSinceIntoxicated)
             if (counter.currentDose > 30.0) { // TODO make this configurable
                 // wasted
                 it.damage(OverdoseDamageSource, Float.MAX_VALUE)
             }
-            println()
         }
     }
 

@@ -10,6 +10,7 @@ object OverdoseDamageSource: DamageSource("overdose") {
         setUsesMagic()
         setBypassesArmor()
         setUnblockable()
+        setOutOfWorld() // somehow we need this to instantly kill a player
     }
 
     override fun getDeathMessage(entity: LivingEntity): Text {

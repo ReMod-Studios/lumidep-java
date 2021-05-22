@@ -7,9 +7,9 @@ import kotlin.math.exp
 abstract class DoseCounterComponent {
     var currentDose = 0.0
         set(value) {
+            ticksSinceIntoxicated = 0L // reset
             intoxicated = value > 0.0
-            field = if (value < 0.0) {
-                ticksSinceIntoxicated = 0L
+            field = if (value <= 1E-2) {
                 0.0
             } else {
                 value
@@ -20,7 +20,7 @@ abstract class DoseCounterComponent {
 
     fun tickLogic() {
         if (intoxicated) {
-            currentDose *= exp(-ticksSinceIntoxicated.toDouble())
+            currentDose *= exp(-ticksSinceIntoxicated.toDouble() / 80.0)
             ticksSinceIntoxicated++
         }
     }

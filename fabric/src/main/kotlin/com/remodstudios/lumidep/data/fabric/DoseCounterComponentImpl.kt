@@ -9,13 +9,13 @@ import net.minecraft.nbt.CompoundTag
 
 class DoseCounterComponentImpl: DoseCounterComponent(), Component, CommonTickingComponent, AutoSyncedComponent {
     override fun readFromNbt(tag: CompoundTag) {
-        currentDose = tag.getDouble("currentDose")
         ticksSinceIntoxicated = tag.getLong("ticksSinceIntoxicated")
+        currentDose = tag.getDouble("currentDose")
     }
 
     override fun writeToNbt(tag: CompoundTag) {
-        tag.putDouble("currentDose", currentDose)
         tag.putLong("ticksSinceIntoxicated", ticksSinceIntoxicated)
+        tag.putDouble("currentDose", currentDose)
     }
 
     override fun tick() {
