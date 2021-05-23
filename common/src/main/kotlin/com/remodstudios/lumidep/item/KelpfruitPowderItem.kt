@@ -30,11 +30,13 @@ class KelpfruitPowderItem(settings: Settings) : Item(settings) {
 
             //user.increaseStat(LumidepStats.CONSUME_KELPFRUIT_POWDER, 1)
 
+            /*
             user.applyStatusEffect(
                 type = StatusEffects.SPEED,
                 duration = 700,
                 amplifier = 2
             )
+            */
 
             world.playSound(null, user.x, user.y, user.z, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 0.5f, 1.0f)
         }
