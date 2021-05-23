@@ -13,6 +13,10 @@ import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Position
 import net.minecraft.util.math.Vec3d
 import kotlin.math.PI
+import kotlin.properties.Delegates
+import kotlin.properties.ObservableProperty
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 // Miscellaneous extensions
 
@@ -65,3 +69,6 @@ fun PlayerEntity.applyStatusEffect(type: StatusEffect,
 
 fun argb(a: Int = 255, r: Int, g: Int, b: Int)
     = (a and 0xff shl 24) or (r and 0xff shl 16) or (g and 0xff shl 8) or (b and 0xff)
+
+inline fun <T> syncedDelegate(initialValue: T, crossinline onChange: () -> Unit)
+    = Delegates.observable(initialValue) { _, _, _ -> onChange() }
