@@ -1,22 +1,14 @@
 package com.remodstudios.remodcore
 
-import net.minecraft.client.render.BufferBuilder
-import net.minecraft.client.render.VertexFormat
-import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
-import net.minecraft.util.math.Position
-import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.*
+import net.minecraft.world.World
 import kotlin.math.PI
 import kotlin.properties.Delegates
-import kotlin.properties.ObservableProperty
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 // Miscellaneous extensions
 
@@ -43,10 +35,10 @@ inline fun Boolean.ifTrueThenAlso(also: () -> Unit): Boolean {
     return this
 }
 
-inline fun MatrixStack.frame(block: () -> Unit) {
-    this.push()
-    block()
-    this.pop()
+inline operator fun MatrixStack.invoke(block: (MatrixStack) -> Unit) {
+    push()
+    block(this)
+    pop()
 }
 
 operator fun Vec3d.unaryMinus(): Vec3d = this.multiply(-1.0) // can't use #negate since it's client-side only :mojank:
@@ -67,8 +59,14 @@ fun PlayerEntity.applyStatusEffect(type: StatusEffect,
     applyStatusEffect(StatusEffectInstance(type, duration, amplifier, ambient, showParticles, showIcon, hiddenEffect))
 }
 
-fun argb(a: Int = 255, r: Int, g: Int, b: Int)
-    = (a and 0xff shl 24) or (r and 0xff shl 16) or (g and 0xff shl 8) or (b and 0xff)
+@JvmInline
+value class Color(val value: Int) {
+    constructor(a: Int = 255, r: Int, g: Int, b: Int) : this(
+        value = (a and 0xff shl 24) or (r and 0xff shl 16) or (g and 0xff shl 8) or (b and 0xff)
+    )
+}
 
-inline fun <T> syncedDelegate(initialValue: T, crossinline onChange: () -> Unit)
-    = Delegates.observable(initialValue) { _, _, _ -> onChange() }
+typealias Predicate<T> = (T) -> Boolean
+
+inline fun <reified T: Entity> World.getEntities(box: Box, noinline predicate: Predicate<T>? = null): List<T>
+    = getEntitiesByClass(T::class.java, box, predicate)
