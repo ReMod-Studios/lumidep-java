@@ -16,12 +16,6 @@ loom {
     mixinConfig "lumidep.mixins.json"
 }
 
-repositories {
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    mavenCentral()
-    maven { url 'https://thedarkcolour.github.io/KotlinForForge/' }
-}
-
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
@@ -29,6 +23,8 @@ dependencies {
 
     modImplementation "software.bernie.geckolib:geckolib-forge-${rootProject.minecraft_version}:${rootProject.geckolib_version}"
     implementation "thedarkcolour:kotlinforforge:${rootProject.kotlinforforge_version}"
+    implementation 'com.github.nsk90:kstatemachine:0.5.5'
+    modImplementation("io.github.remod-studios:remod-core-forge:${rootProject.remodcore_version}")
 
     implementation(project(path: ":common")) {
         transitive = false

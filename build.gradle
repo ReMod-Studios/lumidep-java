@@ -11,6 +11,14 @@ architectury {
 subprojects {
     apply plugin: "dev.architectury.loom"
 
+    repositories {
+        maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+        maven { url 'https://thedarkcolour.github.io/KotlinForForge/' }
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
+        mavenLocal()
+    }
+
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         // The following line declares the mojmap mappings, you may use other mappings as well

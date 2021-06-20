@@ -1,8 +1,3 @@
-repositories {
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    mavenCentral()
-}
-
 dependencies {
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
@@ -11,7 +6,10 @@ dependencies {
     modApi "me.shedaniel:architectury:${rootProject.architectury_version}"
     implementation "software.bernie.geckolib:geckolib-core:${rootProject.geckolib_core_version}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "com.tinder.statemachine:statemachine:0.2.0"
+    implementation 'com.github.nsk90:kstatemachine:0.5.5'
+
+    // Compile only to include the classes
+    modCompileOnly("io.github.remod-studios:remod-core-fabric:${rootProject.remodcore_version}")
 }
 
 architectury {

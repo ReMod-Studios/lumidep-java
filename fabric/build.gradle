@@ -11,12 +11,6 @@ architectury {
     fabric()
 }
 
-repositories {
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    mavenCentral()
-    maven { url 'https://ladysnake.jfrog.io/artifactory/mods'}
-}
-
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
@@ -24,6 +18,11 @@ dependencies {
     modApi "me.shedaniel:architectury-fabric:${rootProject.architectury_version}"
     modImplementation "software.bernie.geckolib:geckolib-fabric-${rootProject.minecraft_version}:${rootProject.geckolib_version}:dev"
     modImplementation "net.fabricmc:fabric-language-kotlin:${rootProject.flk_version}+kotlin.${rootProject.kotlin_version}"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'com.github.nsk90:kstatemachine:0.5.5'
+
+    modImplementation("io.github.remod-studios:remod-core-fabric:${rootProject.remodcore_version}")
 
     ["base", "entity"].forEach {
         modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-$it:${rootProject.cca_version}"
@@ -39,7 +38,6 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) {
         transitive = false
     }
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 processResources {
